@@ -30,4 +30,6 @@ public class User {
 
     @JsonView(View.Admin.class)
     private String auth;
+
+    // In entity we can use multiple view
 }

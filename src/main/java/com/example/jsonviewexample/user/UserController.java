@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    @JsonView(View.Admin.class)
+    @JsonView(View.Admin.class) // In Controller side we can't use multiple View like JsonView({View.Base.class, View.Admin.class})
     List<User> getAllDetails(){
         return userService.getUsers();
     }
