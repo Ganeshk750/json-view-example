@@ -1,5 +1,7 @@
 package com.example.jsonviewexample;
 
+import com.example.jsonviewexample.cach.City;
+import com.example.jsonviewexample.cach.CityRepository;
 import com.example.jsonviewexample.user.User;
 import com.example.jsonviewexample.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +19,7 @@ public class JsonViewExampleApplication {
     }
 
     @Bean
-    CommandLineRunner run(UserRepository userRepository){
+    CommandLineRunner run(UserRepository userRepository, CityRepository cityRepository){
         return args -> IntStream.rangeClosed(1,30).forEach( i ->{
             User user = new User();
             user.setUsername("user" + i);
@@ -26,6 +28,14 @@ public class JsonViewExampleApplication {
             user.setRole("role"+ i);
             user.setAuth("auth"+ i);
             userRepository.save(user);
+
+            /********************************/
+
+            City city = new City();
+            city.setId(1);
+            city.setName("Bangalore");
+            city.setPopulation(1478525858L);
+            cityRepository.save(city);
         });
     }
 }
