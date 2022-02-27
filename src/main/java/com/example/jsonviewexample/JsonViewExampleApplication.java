@@ -8,10 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.util.stream.IntStream;
 
 @SpringBootApplication
+@EnableScheduling
 public class JsonViewExampleApplication {
 
     public static void main(String[] args) {
@@ -37,5 +41,15 @@ public class JsonViewExampleApplication {
             city.setPopulation(1478525858L);
             cityRepository.save(city);
         });
+    }
+
+    // FOR SCHEDULER
+    @Bean
+    public TaskScheduler taskScheduler(){
+        ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+       // threadPoolTaskScheduler.setPoolSize(5);
+        threadPoolTaskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
+        return threadPoolTaskScheduler;
+
     }
 }
